@@ -17,8 +17,3 @@
   color: var(--color-text-secondary);
   margin-bottom: var(--space-xs);
 }
-
-.footer__note {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-tertiary);
-}
