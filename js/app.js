@@ -362,7 +362,6 @@ class UIManager {
   #user;
   #elements = {};
   #lastFocusedElement = null;
-  #focusTrapHandler = null;
 
   constructor(eventManager, user) {
     this.#eventManager = eventManager;
@@ -392,8 +391,6 @@ class UIManager {
       registrationsCount: document.getElementById("registrations-count"),
       registrationsBadge: document.getElementById("registrations-badge"),
       eventModal: document.getElementById("event-modal"),
-      modalOverlay: document.getElementById("modal-overlay"),
-      modalDialog: document.getElementById("modal-dialog"),
       modalBody: document.getElementById("modal-body"),
       modalClose: document.getElementById("modal-close"),
       toastContainer: document.getElementById("toast-container"),
@@ -492,16 +489,25 @@ class UIManager {
     this.#elements.modalClose.addEventListener("click", () =>
       this.#closeModal(),
     );
-    this.#elements.modalOverlay.addEventListener("click", () =>
-      this.#closeModal(),
-    );
 
-    document.addEventListener("keydown", (e) => {
-      if (
-        e.key === "Escape" &&
-        !this.#elements.eventModal.hasAttribute("hidden")
-      ) {
+    this.#elements.eventModal.addEventListener("click", (e) => {
+      const dialog = this.#elements.eventModal;
+      const rect = dialog.getBoundingClientRect();
+      const clickedOutside =
+        e.clientX < rect.left ||
+        e.clientX > rect.right ||
+        e.clientY < rect.top ||
+        e.clientY > rect.bottom;
+      if (clickedOutside) {
         this.#closeModal();
+      }
+    });
+
+    this.#elements.eventModal.addEventListener("close", () => {
+      this.#elements.modalBody.innerHTML = "";
+      if (this.#lastFocusedElement) {
+        this.#lastFocusedElement.focus();
+        this.#lastFocusedElement = null;
       }
     });
 
@@ -903,7 +909,7 @@ class UIManager {
             </div>
         `;
 
-    this.#elements.eventModal.hidden = false;
+    this.#elements.eventModal.showModal();
 
     const modalRegisterBtn = document.getElementById("modal-register-btn");
     const modalCancelBtn = document.getElementById("modal-cancel-btn");
@@ -922,53 +928,10 @@ class UIManager {
     }
 
     this.#elements.modalClose.focus();
-
-    this.#trapFocus();
   }
 
   #closeModal() {
-    this.#elements.eventModal.hidden = true;
-    this.#elements.modalBody.innerHTML = "";
-
-    if (this.#lastFocusedElement) {
-      this.#lastFocusedElement.focus();
-    }
-
-    this.#elements.modalDialog.removeEventListener(
-      "keydown",
-      this.#focusTrapHandler,
-    );
-  }
-
-  #trapFocus() {
-    this.#focusTrapHandler = (e) => {
-      if (e.key !== "Tab") return;
-
-      const focusable = this.#elements.modalDialog.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      );
-      if (focusable.length === 0) return;
-
-      const firstFocusable = focusable[0];
-      const lastFocusable = focusable[focusable.length - 1];
-
-      if (e.shiftKey) {
-        if (document.activeElement === firstFocusable) {
-          e.preventDefault();
-          lastFocusable.focus();
-        }
-      } else {
-        if (document.activeElement === lastFocusable) {
-          e.preventDefault();
-          firstFocusable.focus();
-        }
-      }
-    };
-
-    this.#elements.modalDialog.addEventListener(
-      "keydown",
-      this.#focusTrapHandler,
-    );
+    this.#elements.eventModal.close();
   }
 
   #showToast(type, message) {
