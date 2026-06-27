@@ -30,7 +30,7 @@
 
 .header__logo-icon {
   color: var(--color-accent);
-  font-size: var(--font-size-lg);
+  margin-top: var(--space-sm);
 }
 
 .header__nav {

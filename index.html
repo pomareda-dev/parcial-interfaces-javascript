@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EventHub - Plataforma de gestión e inscripción de eventos">
-    <title>EventHub — Gestión de Eventos</title>
+    <meta name="description" content="Plataforma de gestión e inscripción de eventos">
+    <title>Organizador de Eventos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
     <a href="#eventos" class="skip-link">Saltar al contenido principal</a>
 
-    <!-- ============ HEADER ============ -->
     <header class="header">
         <div class="header__container">
-            <a href="#" class="header__logo" aria-label="EventHub inicio">
-                <span class="header__logo-icon">◆</span>
-                <span class="header__logo-text">EventHub</span>
+            <a href="#" class="header__logo" aria-label="Organizador de Eventos">
+                <span class="header__logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M3 20a2 2 0 0 0 2 2h10a2.4 2.4 0 0 0 1.706-.706l3.588-3.588A2.4 2.4 0 0 0 21 16V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z" />
+                        <path d="M15 22v-5a1 1 0 0 1 1-1h5" />
+                        <path d="M8 2v4" />
+                        <path d="M16 2v4" />
+                        <path d="M3 10h18" />
+                    </svg>
+                </span>
+                <span class="header__logo-text">Organizador de Eventos</span>
             </a>
 
             <nav class="header__nav" id="header-nav" aria-label="Navegación principal">
                 <a href="#eventos" class="header__link header__link--active" data-section="eventos">Eventos</a>
-                <a href="#mis-inscripciones" class="header__link" data-section="mis-inscripciones" id="nav-inscripciones">
+                <a href="#mis-inscripciones" class="header__link" data-section="mis-inscripciones"
+                    id="nav-inscripciones">
                     Mis Inscripciones
                     <span class="header__badge" id="registrations-badge" hidden>0</span>
                 </a>
             </nav>
 
-            <button class="header__toggle" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="header-nav">
+            <button class="header__toggle" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false"
+                aria-controls="header-nav">
                 <span class="header__toggle-bar"></span>
                 <span class="header__toggle-bar"></span>
                 <span class="header__toggle-bar"></span>
@@ -38,11 +51,11 @@
     </header>
 
     <main class="main">
-        <!-- ============ HERO ============ -->
         <section class="hero">
             <div class="hero__container">
                 <h1 class="hero__title">Descubre eventos, regístrate y participa.</h1>
-                <p class="hero__subtitle">Explora conferencias, conciertos, talleres y más. Gestiona tus inscripciones en un solo lugar.</p>
+                <p class="hero__subtitle">Explora conferencias, conciertos, talleres y más. Gestiona tus inscripciones
+                    en un solo lugar.</p>
                 <div class="hero__stats">
                     <div class="hero__stat">
                         <span class="hero__stat-number" id="stat-total">0</span>
@@ -60,7 +73,6 @@
             </div>
         </section>
 
-        <!-- ============ EVENTS SECTION ============ -->
         <section class="events" id="eventos">
             <div class="events__container">
                 <div class="events__header">
@@ -68,21 +80,17 @@
                     <p class="events__count" id="events-count" aria-live="polite"></p>
                 </div>
 
-                <!-- Toolbar: search + sort -->
                 <div class="toolbar">
                     <div class="search">
-                        <svg class="search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
-                            <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <svg class="search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            aria-hidden="true">
+                            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                            <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
                         </svg>
-                        <input
-                            type="text"
-                            class="search__input"
-                            id="search-input"
+                        <input type="text" class="search__input" id="search-input"
                             placeholder="Buscar por nombre o ubicación..."
-                            aria-label="Buscar eventos por nombre o ubicación"
-                            autocomplete="off"
-                        >
+                            aria-label="Buscar eventos por nombre o ubicación" autocomplete="off">
                         <button class="search__clear" id="search-clear" hidden aria-label="Limpiar búsqueda">×</button>
                     </div>
                     <div class="sort">
@@ -97,21 +105,15 @@
                     </div>
                 </div>
 
-                <!-- Category filter chips -->
-                <div class="filters" id="category-filters" role="group" aria-label="Filtrar por categoría">
-                    <!-- Chips injected by JS -->
-                </div>
+                <div class="filters" id="category-filters" role="group" aria-label="Filtrar por categoría"></div>
 
-                <!-- Events grid -->
-                <div class="events__grid" id="events-grid">
-                    <!-- Event cards injected by JS -->
-                </div>
+                <div class="events__grid" id="events-grid"></div>
 
-                <!-- Empty state -->
                 <div class="events__empty" id="events-empty" hidden>
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/>
-                        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5" />
+                        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
                     </svg>
                     <p class="events__empty-title">No se encontraron eventos</p>
                     <p class="events__empty-text">Prueba con otros criterios de búsqueda o filtros.</p>
@@ -120,46 +122,41 @@
             </div>
         </section>
 
-        <!-- ============ MY REGISTRATIONS ============ -->
         <section class="registrations" id="mis-inscripciones">
             <div class="registrations__container">
                 <div class="registrations__header">
                     <h2 class="registrations__title">Mis Inscripciones</h2>
                     <span class="registrations__count" id="registrations-count"></span>
                 </div>
-                <div class="registrations__list" id="registrations-list">
-                    <!-- Registration cards injected by JS -->
-                </div>
+                <div class="registrations__list" id="registrations-list"></div>
                 <div class="registrations__empty" id="registrations-empty">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                        <line x1="3" y1="9" x2="21" y2="9" stroke="currentColor" stroke-width="1.5"/>
-                        <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.5" />
+                        <line x1="3" y1="9" x2="21" y2="9" stroke="currentColor" stroke-width="1.5" />
+                        <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                        <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
                     </svg>
                     <p class="registrations__empty-title">Aún no estás inscrito en ningún evento</p>
-                    <p class="registrations__empty-text">Explora los eventos disponibles e inscríbete en los que más te interesen.</p>
+                    <p class="registrations__empty-text">Explora los eventos disponibles e inscríbete en los que más te
+                        interesen.</p>
                     <a href="#eventos" class="btn btn--primary" id="explore-btn">Explorar eventos</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ============ EVENT DETAIL MODAL ============ -->
     <div class="modal" id="event-modal" hidden>
         <div class="modal__overlay" id="modal-overlay" tabindex="-1"></div>
         <div class="modal__dialog" id="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
             <button class="modal__close" id="modal-close" aria-label="Cerrar ventana de detalles">×</button>
-            <div id="modal-body">
-                <!-- Content injected by JS -->
-            </div>
+            <div id="modal-body"></div>
         </div>
     </div>
 
-    <!-- ============ TOAST NOTIFICATIONS ============ -->
     <div class="toast-container" id="toast-container" role="alert" aria-live="assertive"></div>
 
-    <!-- ============ FOOTER ============ -->
     <footer class="footer">
         <div class="footer__container">
             <p class="footer__text">EventHub — Plataforma de gestión de eventos</p>
@@ -169,4 +166,5 @@
 
     <script src="js/app.js"></script>
 </body>
+
 </html>
