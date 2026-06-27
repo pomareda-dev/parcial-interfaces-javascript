@@ -1,12 +1,12 @@
 "use strict";
 
 const CATEGORY_CONFIG = {
-  Música: { color: "#8B5CF6", colorDark: "#7C3AED", icon: "♪" },
-  Deportes: { color: "#F97316", colorDark: "#EA580C", icon: "⚽" },
-  Tecnología: { color: "#3B82F6", colorDark: "#2563EB", icon: "⚡" },
-  Gastronomía: { color: "#EC4899", colorDark: "#DB2777", icon: "🍽" },
-  Negocios: { color: "#14B8A6", colorDark: "#0D9488", icon: "💼" },
-  Arte: { color: "#F59E0B", colorDark: "#D97706", icon: "🎨" },
+  Música: { color: "#8B5CF6", colorDark: "#7C3AED" },
+  Deportes: { color: "#F97316", colorDark: "#EA580C" },
+  Tecnología: { color: "#3B82F6", colorDark: "#2563EB" },
+  Gastronomía: { color: "#EC4899", colorDark: "#DB2777" },
+  Negocios: { color: "#14B8A6", colorDark: "#0D9488" },
+  Arte: { color: "#F59E0B", colorDark: "#D97706" },
 };
 
 class Event {
@@ -119,7 +119,6 @@ class Event {
       CATEGORY_CONFIG[this.#category] || {
         color: "#4F46E5",
         colorDark: "#4338CA",
-        icon: "•",
       }
     );
   }
@@ -542,7 +541,7 @@ class UIManager {
     ];
 
     categories.forEach((cat) => {
-      const config = CATEGORY_CONFIG[cat] || { color: "#4F46E5", icon: "•" };
+      const config = CATEGORY_CONFIG[cat] || { color: "#4F46E5" };
       const isActive = activeCategory === cat;
       chipsHTML.push(`
                 <button class="filter-chip ${isActive ? "filter-chip--active" : ""}" data-category="${cat}">
